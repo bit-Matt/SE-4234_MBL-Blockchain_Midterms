@@ -2,10 +2,10 @@
 
 This project contains a Sepolia-ready `TipPost` smart contract and a React + Vite frontend scaffold for the midterms dApp assignment.
 
-## Quick Links (Fill Before Submission)
+## Quick Links
 
-- Deployed contract on Sepolia: `TODO_CONTRACT_ADDRESS`
-- Etherscan link: `TODO_ETHERSCAN_URL`
+- Deployed contract on Sepolia: `0x03a9f12f68c0d995201CE2d14A9f33585569C564`
+- Etherscan link: <https://sepolia.etherscan.io/address/0x03a9f12f68c0d995201CE2d14A9f33585569C564#code>
 - Live frontend URL: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
 
 ## Project Structure
@@ -105,36 +105,40 @@ npm run build
   - `VITE_CHAIN_ID=11155111`
 - Deploy and test with MetaMask on Sepolia
 
-## Screenshots / Evidence (Fill This Section)
-
-Replace each `TODO_URL_*` with your hosted image link (GitHub issue upload, Imgur, Cloudinary, etc.).
+## Screenshots / Evidence
 
 ### 1) Live dApp + MetaMask on Sepolia
 
 Live URL used for demo: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
 
-![Live dApp with MetaMask connected](TODO_URL_LIVE_DAPP_METAMASK)
+<img width="1918" height="982" alt="Deployed Site Screenshot" src="https://github.com/user-attachments/assets/919a196b-1a07-4b0c-8292-8036e7d6b0cb" />
 
 
 ### 2) Post Created and Visible in Feed
 
-![Post created and visible](TODO_URL_POST_CREATED)
+<img width="657" height="405" alt="post displayed" src="https://github.com/user-attachments/assets/7c48afdd-2e67-4e05-bc45-b6b547c363da" />
+
 
 ### 3) Like Transaction Confirmed (0.0001 ETH)
 
-![Like transaction confirmed](TODO_URL_LIKE_TX_CONFIRMED)
+<img width="956" height="792" alt="like confirm-1" src="https://github.com/user-attachments/assets/d59a022f-885b-44b0-901c-8473c66c55db" />
+
 
 ### 4) Like Count and Earnings Updated
 
-![Like count and earnings updated](TODO_URL_LIKES_EARNINGS_UPDATED)
+<img width="1152" height="98" alt="earnings" src="https://github.com/user-attachments/assets/a0864469-fee5-454c-b3d3-b1a8cbdcc9f3" />
+<img width="339" height="405" alt="likes" src="https://github.com/user-attachments/assets/d7146ecd-0a98-4ef5-ac84-f3862a305d2d" />
+
 
 ### 5) Double-Like Blocked with Error
 
-![Double-like blocked error](TODO_URL_DOUBLE_LIKE_BLOCKED)
+<img width="798" height="502" alt="double-like block" src="https://github.com/user-attachments/assets/3dd6332a-318d-4834-8af7-ef211b48a366" />
+
 
 ### 6) Hardhat Tests Passing
 
-![Hardhat tests passing](TODO_URL_HARDHAT_TESTS_PASSING)
+<img width="1202" height="301" alt="hardhat run passed" src="https://github.com/user-attachments/assets/c343d972-8175-4528-b127-a980ac8be38f" />
+
 
 ## How to Get Sepolia ETH (Faucets)
 
@@ -148,10 +152,3 @@ You need Sepolia ETH to deploy and test transactions (`createPost`, `likePost`).
 - <https://cloud.google.com/application/web3/faucet/ethereum/sepolia>
 - <https://sepoliafaucet.com/>
 - <https://www.infura.io/faucet/sepolia>
-
-## Final Values To Fill Before Submission
-
-- GitHub repo URL: `TODO`
-- Contract address: `TODO_CONTRACT_ADDRESS`
-- Etherscan link: `TODO_ETHERSCAN_URL`
-- Live frontend URL: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
