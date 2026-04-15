@@ -2,6 +2,12 @@
 
 This project contains a Sepolia-ready `TipPost` smart contract and a React + Vite frontend scaffold for the midterms dApp assignment.
 
+## Quick Links (Fill Before Submission)
+
+- Deployed contract on Sepolia: `TODO_CONTRACT_ADDRESS`
+- Etherscan link: `TODO_ETHERSCAN_URL`
+- Live frontend URL: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
+
 ## Project Structure
 
 - `contracts/` - Hardhat TypeScript project (`TipPost.sol`, tests, deploy script)
@@ -81,6 +87,8 @@ Copy `frontend/.env.example` to `frontend/.env`:
 npm run dev
 ```
 
+Open the app at `http://localhost:5173`, connect MetaMask, and switch to Sepolia.
+
 ### 4) Build production bundle
 
 ```bash
@@ -97,41 +105,15 @@ npm run build
   - `VITE_CHAIN_ID=11155111`
 - Deploy and test with MetaMask on Sepolia
 
-## Required Runtime Behavior Checklist
-
-- [ ] Connect wallet button works
-- [ ] Wrong-network warning appears when not on Sepolia
-- [ ] Create post writes on-chain
-- [ ] Feed displays image, caption, creator, likes, earned ETH
-- [ ] Like sends `0.0001 ETH`
-- [ ] Already-liked post shows heart state
-- [ ] Self-like disabled/blocked
-- [ ] Earnings display updates for connected user
-- [ ] Transaction status shows loading/success/error
-- [ ] Feed refreshes on `PostCreated` and `PostLiked` events
-
-## Submission Checklist (Rubric-Mapped)
-
-- [ ] Public GitHub repository URL
-- [ ] Live frontend URL (Vercel/Netlify)
-- [ ] Sepolia contract address
-- [ ] Screenshots or screen recording showing:
-  - [ ] MetaMask connected on Sepolia at live URL
-  - [ ] Post created and visible
-  - [ ] Like transaction confirmed (`0.0001 ETH`)
-  - [ ] Like count + earnings updated
-  - [ ] Double-like blocked with error
-- [ ] `npx hardhat test` passing screenshot
-- [ ] README contains setup + deployed links
-
 ## Screenshots / Evidence (Fill This Section)
 
 Replace each `TODO_URL_*` with your hosted image link (GitHub issue upload, Imgur, Cloudinary, etc.).
 
 ### 1) Live dApp + MetaMask on Sepolia
 
-![Live dApp with MetaMask connected]
-Link: https://se-4234-mbl-blockchain-midterms-two.vercel.app/
+Live URL used for demo: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
+
+![Live dApp with MetaMask connected](TODO_URL_LIVE_DAPP_METAMASK)
 
 
 ### 2) Post Created and Visible in Feed
@@ -154,7 +136,14 @@ Link: https://se-4234-mbl-blockchain-midterms-two.vercel.app/
 
 ![Hardhat tests passing](TODO_URL_HARDHAT_TESTS_PASSING)
 
-## Faucets
+## How to Get Sepolia ETH (Faucets)
+
+You need Sepolia ETH to deploy and test transactions (`createPost`, `likePost`).
+
+1. Open one of the faucet links below.
+2. Connect your wallet or paste your Sepolia wallet address.
+3. Request test ETH and wait for confirmation.
+4. In MetaMask, ensure the network is set to Sepolia and verify the balance arrived.
 
 - <https://cloud.google.com/application/web3/faucet/ethereum/sepolia>
 - <https://sepoliafaucet.com/>
@@ -163,6 +152,6 @@ Link: https://se-4234-mbl-blockchain-midterms-two.vercel.app/
 ## Final Values To Fill Before Submission
 
 - GitHub repo URL: `TODO`
-- Contract address: `TODO`
-- Etherscan link: `TODO`
-- Live frontend URL: `TODO`
+- Contract address: `TODO_CONTRACT_ADDRESS`
+- Etherscan link: `TODO_ETHERSCAN_URL`
+- Live frontend URL: <https://se-4234-mbl-blockchain-midterms-two.vercel.app/>
