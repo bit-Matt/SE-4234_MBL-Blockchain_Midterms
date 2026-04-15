@@ -6,7 +6,7 @@ describe("TipPost", function () {
   async function deployFixture() {
     const [creator, liker, other] = await ethers.getSigners();
     const TipPost = await ethers.getContractFactory("TipPost");
-    const tipPost = await TipPost.deploy();
+    const tipPost = (await TipPost.deploy()) as any;
     await tipPost.waitForDeployment();
 
     return { tipPost, creator, liker, other };
@@ -65,6 +65,24 @@ describe("TipPost", function () {
     await expect(
       tipPost.connect(creator).likePost(1, { value: likeCost })
     ).to.be.revertedWith("Cannot like own post");
+  });
+
+  it("rejects like when post does not exist", async function () {
+    const { tipPost, liker } = await deployFixture();
+    const likeCost = await tipPost.likeCost();
+
+    await expect(
+      tipPost.connect(liker).likePost(1, { value: likeCost })
+    ).to.be.revertedWith("Post does not exist");
+  });
+
+  it("rejects like with insufficient ETH", async function () {
+    const { tipPost, creator, liker } = await deployFixture();
+    await tipPost.connect(creator).createPost("https://img.test/a.png", "hello");
+
+    await expect(
+      tipPost.connect(liker).likePost(1, { value: 1n })
+    ).to.be.revertedWith("Insufficient ETH sent");
   });
 });
 
