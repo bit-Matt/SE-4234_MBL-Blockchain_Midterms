@@ -116,19 +116,21 @@ export function useTipPost() {
       const ready = await checkNetwork();
       if (!ready) {
         setStatus({ kind: "error", message: "Switch MetaMask to Sepolia." });
-        return;
+        return false;
       }
 
       const contract = await getWriteContract();
-      if (!contract) return;
+      if (!contract) return false;
 
       try {
         setStatus({ kind: "loading", message: "Creating post..." });
         const tx = await contract.createPost(imageUrl, caption);
         await tx.wait();
         setStatus({ kind: "success", message: "Post created." });
+        return true;
       } catch (error) {
         setStatus({ kind: "error", message: parseError(error) });
+        return false;
       }
     },
     [checkNetwork, getWriteContract]

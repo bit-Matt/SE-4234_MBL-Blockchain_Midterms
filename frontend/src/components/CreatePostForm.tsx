@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 
 type Props = {
-  onSubmit: (imageUrl: string, caption: string) => Promise<void>;
+  onSubmit: (imageUrl: string, caption: string) => Promise<boolean>;
   disabled: boolean;
 };
 
@@ -12,9 +12,11 @@ export function CreatePostForm({ onSubmit, disabled }: Props) {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    await onSubmit(imageUrl.trim(), caption.trim());
-    setImageUrl("");
-    setCaption("");
+    const created = await onSubmit(imageUrl.trim(), caption.trim());
+    if (created) {
+      setImageUrl("");
+      setCaption("");
+    }
   }
 
   return (
