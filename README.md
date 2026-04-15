@@ -124,6 +124,36 @@ npm run build
 - [ ] `npx hardhat test` passing screenshot
 - [ ] README contains setup + deployed links
 
+## Screenshots / Evidence (Fill This Section)
+
+Replace each `TODO_URL_*` with your hosted image link (GitHub issue upload, Imgur, Cloudinary, etc.).
+
+### 1) Live dApp + MetaMask on Sepolia
+
+![Live dApp with MetaMask connected]
+Link: https://se-4234-mbl-blockchain-midterms-two.vercel.app/
+
+
+### 2) Post Created and Visible in Feed
+
+![Post created and visible](TODO_URL_POST_CREATED)
+
+### 3) Like Transaction Confirmed (0.0001 ETH)
+
+![Like transaction confirmed](TODO_URL_LIKE_TX_CONFIRMED)
+
+### 4) Like Count and Earnings Updated
+
+![Like count and earnings updated](TODO_URL_LIKES_EARNINGS_UPDATED)
+
+### 5) Double-Like Blocked with Error
+
+![Double-like blocked error](TODO_URL_DOUBLE_LIKE_BLOCKED)
+
+### 6) Hardhat Tests Passing
+
+![Hardhat tests passing](TODO_URL_HARDHAT_TESTS_PASSING)
+
 ## Faucets
 
 - <https://cloud.google.com/application/web3/faucet/ethereum/sepolia>
@@ -132,6 +162,7 @@ npm run build
 
 ## Final Values To Fill Before Submission
 
+- GitHub repo URL: `TODO`
 - Contract address: `TODO`
 - Etherscan link: `TODO`
 - Live frontend URL: `TODO`
