@@ -149,13 +149,8 @@ export function useTipPost() {
 
       const withLikeState = await Promise.all(
         data.map(async (item) => {
-          const id = (item.id ?? item[0]) as bigint;
-          const creator = (item.creator ?? item[1]) as string;
-          const imageUrl = (item.imageUrl ?? item[2]) as string;
-          const caption = (item.caption ?? item[3]) as string;
-          const likes = (item.likes ?? item[4]) as bigint;
-          const totalEarned = (item.totalEarned ?? item[5]) as bigint;
-          const timestamp = (item.timestamp ?? item[6]) as bigint;
+          const { id, creator, imageUrl, caption, likes, totalEarned, timestamp } =
+            item;
           const liked = (await contract.checkLiked(id, account)) as boolean;
 
           return {
