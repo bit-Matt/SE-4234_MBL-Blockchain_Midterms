@@ -12,6 +12,8 @@ function App() {
     isLoadingFeed,
     isCorrectNetwork,
     connectWallet,
+    disconnectWallet,
+    switchToSepolia,
     createPost,
     likePost,
   } = useTipPost();
@@ -23,14 +25,24 @@ function App() {
           <h1>TipPost dApp</h1>
           <p>Pay-to-like social feed on Sepolia</p>
         </div>
-        <button onClick={connectWallet}>
-          {account ? `Connected: ${shorten(account)}` : "Connect Wallet"}
-        </button>
+        {account ? (
+          <div className="wallet-actions">
+            <button onClick={disconnectWallet}>Disconnect</button>
+            <button onClick={connectWallet}>{`Connected: ${shorten(account)}`}</button>
+          </div>
+        ) : (
+          <button onClick={connectWallet}>Connect Wallet</button>
+        )}
       </header>
 
       {account && !isCorrectNetwork && (
         <section className="card warning">
           Wrong network. Switch MetaMask to Sepolia (chain ID 11155111).
+          <div className="switch-network-action">
+            <button onClick={switchToSepolia} disabled={status.kind === "loading"}>
+              Switch to Sepolia
+            </button>
+          </div>
         </section>
       )}
 

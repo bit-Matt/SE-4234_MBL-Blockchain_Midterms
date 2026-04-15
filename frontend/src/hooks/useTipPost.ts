@@ -15,6 +15,7 @@ const defaultStatus: TransactionStatus = { kind: "idle", message: "" };
 
 const CHAIN_ID = Number(import.meta.env.VITE_CHAIN_ID ?? "11155111");
 const CONTRACT_ADDRESS = String(import.meta.env.VITE_CONTRACT_ADDRESS ?? "");
+const SEPOLIA_CHAIN_HEX = "0xaa36a7";
 
 export function useTipPost() {
   const [account, setAccount] = useState<string>("");
@@ -69,6 +70,66 @@ export function useTipPost() {
     }
   }, [checkNetwork]);
 
+  const disconnectWallet = useCallback(() => {
+    setAccount("");
+    setPosts([]);
+    setEarnedEth("0.0");
+    setIsCorrectNetwork(false);
+    setStatus({ kind: "success", message: "Wallet disconnected." });
+  }, []);
+
+  const switchToSepolia = useCallback(async () => {
+    if (!window.ethereum) {
+      setStatus({ kind: "error", message: "MetaMask not detected." });
+      return false;
+    }
+
+    try {
+      setStatus({ kind: "loading", message: "Requesting network switch..." });
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: SEPOLIA_CHAIN_HEX }],
+      });
+    } catch (error) {
+      const maybeError = error as { code?: number; message?: string };
+      if (maybeError.code !== 4902) {
+        setStatus({ kind: "error", message: parseError(error) });
+        return false;
+      }
+
+      try {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: SEPOLIA_CHAIN_HEX,
+              chainName: "Sepolia",
+              nativeCurrency: {
+                name: "SepoliaETH",
+                symbol: "ETH",
+                decimals: 18,
+              },
+              rpcUrls: ["https://rpc.sepolia.org"],
+              blockExplorerUrls: ["https://sepolia.etherscan.io"],
+            },
+          ],
+        });
+      } catch (addError) {
+        setStatus({ kind: "error", message: parseError(addError) });
+        return false;
+      }
+    }
+
+    const ok = await checkNetwork();
+    if (ok) {
+      setStatus({ kind: "success", message: "Switched to Sepolia." });
+      return true;
+    }
+
+    setStatus({ kind: "error", message: "Network switch not completed." });
+    return false;
+  }, [checkNetwork]);
+
   const loadFeed = useCallback(async () => {
     if (!account) return;
     const contract = await getReadContract();
@@ -88,8 +149,25 @@ export function useTipPost() {
 
       const withLikeState = await Promise.all(
         data.map(async (item) => {
-          const liked = (await contract.checkLiked(item.id, account)) as boolean;
-          return { ...item, hasLiked: liked };
+          const id = (item.id ?? item[0]) as bigint;
+          const creator = (item.creator ?? item[1]) as string;
+          const imageUrl = (item.imageUrl ?? item[2]) as string;
+          const caption = (item.caption ?? item[3]) as string;
+          const likes = (item.likes ?? item[4]) as bigint;
+          const totalEarned = (item.totalEarned ?? item[5]) as bigint;
+          const timestamp = (item.timestamp ?? item[6]) as bigint;
+          const liked = (await contract.checkLiked(id, account)) as boolean;
+
+          return {
+            id,
+            creator,
+            imageUrl,
+            caption,
+            likes,
+            totalEarned,
+            timestamp,
+            hasLiked: liked,
+          };
         })
       );
 
@@ -108,7 +186,7 @@ export function useTipPost() {
     if (!contract) return;
 
     const earned = (await contract.totalEarnedByUser(account)) as bigint;
-    setEarnedEth(formatEther(earned));
+    setEarnedEth(Number(formatEther(earned)).toFixed(4));
   }, [account, getReadContract]);
 
   const createPost = useCallback(
@@ -219,13 +297,23 @@ export function useTipPost() {
     isLoadingFeed,
     isCorrectNetwork,
     connectWallet,
+    disconnectWallet,
     createPost,
     likePost,
+    switchToSepolia,
     reload: loadFeed,
   };
 }
 
 function parseError(error: unknown): string {
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: number }).code === 4001
+  ) {
+    return "Transaction request rejected in MetaMask.";
+  }
   if (error instanceof Error) return error.message;
   if (typeof error === "string") return error;
   return "Transaction failed. Check wallet and network.";

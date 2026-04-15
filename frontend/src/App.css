@@ -20,13 +20,25 @@
   gap: 16px;
 }
 
+.wallet-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .warning {
   border-color: #f59e0b;
   color: #fde68a;
 }
 
+.switch-network-action {
+  padding-top: 10px;
+}
+
 .status {
   color: #93c5fd;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .earnings {
